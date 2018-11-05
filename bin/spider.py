@@ -107,7 +107,7 @@ if __name__ == '__main__':
         async_result_cn = pool.apply_async(genre_spider_cn, [genre_id])
         async_result_container.append(async_result_en)
         async_result_container.append(async_result_cn)
-        if genre_id % 3 == 0:
+        if genre_id % 5 == 0:
             pool.join()
             for async_result in async_result_container:
                 _result = async_result.get()
