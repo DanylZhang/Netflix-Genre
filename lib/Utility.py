@@ -50,15 +50,17 @@ def get_filepath_md5(filepath):
 
 # 控制台输出信息
 def log(*info):
-    print('[{time}] Info ['.format(time=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())), )
+    print('[{time}] Info ['.format(time=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())), end=' ')
     for msg in info:
-        print(msg, )
+        print(msg, end=' ')
     print(']')
 
 
 # 随机暂停n秒
-def random_sleep():
-    sleep_secs = random.randint(3, 10)
+def random_sleep(start=3, end=10):
+    if start < 0 or end < start:
+        raise Exception('check start and end!')
+    sleep_secs = random.randint(start, end)
     log('random sleep {sleep_secs}s'.format(sleep_secs=sleep_secs))
     time.sleep(sleep_secs)
     return sleep_secs
