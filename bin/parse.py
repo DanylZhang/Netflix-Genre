@@ -39,24 +39,22 @@ def parse_en(genre_id):
         movies_tags = html_parser.select('div.title-card-container div.title-card div.ptrack-content')
         if movies_tags:
             for movies_tag in movies_tags:
-                print(movies_tag)
                 # <a> movie: id name
                 a = movies_tag.select_one('a.slider-refocus')
-                print(a)
-                movie_name = a.attrs['aria-label']
-                movie_link = a.attrs['href']
-                m = re.search(r'/watch/(\d+)', movie_link)
+                # movie_id start
+                m = re.search(r'/watch/(\d+)', a.attrs['href'])
                 movie_id = m.group(1)
+                # movie_id end
+                movie_name = a.attrs['aria-label']
+
                 # <img> movie: img
                 img = movies_tag.select_one('img.boxart-image').attrs['src']
-                print(img)
                 sql = "insert into netflix.movie (movie_id, movie_en, img_en) values ({movie_id},'{movie_name}','{img}') on duplicate key update movie_en=values(movie_en),img_en=values(img_en)".format(
                     movie_id=movie_id, movie_name=pymysql.escape_string(movie_name), img=img)
                 print(sql)
                 netflix_pool.execute(sql)
                 sql = "insert into netflix.genre_movie (genre_id, movie_id) values ({genre_id},{movie_id}) on duplicate key update genre_id=values(genre_id),movie_id=values(movie_id)".format(
                     genre_id=genre_id, movie_id=movie_id)
-                print(sql)
                 netflix_pool.execute(sql)
     except Exception as e:
         print(e)
@@ -85,24 +83,22 @@ def parse_cn(genre_id):
         movies_tags = html_parser.select('div.title-card-container div.title-card div.ptrack-content')
         if movies_tags:
             for movies_tag in movies_tags:
-                print(movies_tag)
                 # <a> movie: id name
                 a = movies_tag.select_one('a.slider-refocus')
-                print(a)
-                movie_name = a.attrs['aria-label']
-                movie_link = a.attrs['href']
-                m = re.search(r'/watch/(\d+)', movie_link)
+                # movie_id start
+                m = re.search(r'/watch/(\d+)', a.attrs['href'])
                 movie_id = m.group(1)
+                # movie_id end
+                movie_name = a.attrs['aria-label']
+
                 # <img> movie: img
                 img = movies_tag.select_one('img.boxart-image').attrs['src']
-                print(img)
-                sql = "insert into netflix.movie (movie_id, movie_cn, img_cn) values ({movie_id},'{movie_name}','{img}') on duplicate key update movie_en=values(movie_en),img_en=values(img_en)".format(
+                sql = "insert into netflix.movie (movie_id, movie_cn, img_cn) values ({movie_id},'{movie_name}','{img}') on duplicate key update movie_cn=values(movie_cn),img_cn=values(img_cn)".format(
                     movie_id=movie_id, movie_name=pymysql.escape_string(movie_name), img=img)
                 print(sql)
                 netflix_pool.execute(sql)
                 sql = "insert into netflix.genre_movie (genre_id, movie_id) values ({genre_id},{movie_id}) on duplicate key update genre_id=values(genre_id),movie_id=values(movie_id)".format(
                     genre_id=genre_id, movie_id=movie_id)
-                print(sql)
                 netflix_pool.execute(sql)
     except Exception as e:
         print(e)
