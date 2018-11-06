@@ -132,6 +132,7 @@ def parse_main():
             print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()), 'elapse:', end_second - start_second)
             # 本轮结束，重置下一轮的开始时间
             start_second = end_second
+            async_result_container.clear()
 
 
 if __name__ == '__main__':
