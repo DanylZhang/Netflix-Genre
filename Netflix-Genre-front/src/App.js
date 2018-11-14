@@ -208,18 +208,20 @@ class App extends Component {
                         {/*vpn*/}
                         <Row gutter={16}>
                             <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                                <h5>Buy me a coffee(微信)</h5>
+                                <img src={wechatPay} style={{width: '300px', height: '260px'}}></img>
+                            </Col>
+                            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                                <h5>Buy me a coffee(支付宝)</h5>
+                                <img src={zhifubaoPay} style={{width: '300px', height: '300px'}}></img>
+                            </Col>
+                            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                                <br/>
+                                <br/>
                                 <div style={{color: 'grey'}}>推荐高可用VPN:
                                     &nbsp;&nbsp;<a href='https://www.expressvpn.com/order' target='_blank'>Express
                                         VPN</a>
                                 </div>
-                            </Col>
-                            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                                <h5 align="center">Buy me a coffee(微信)</h5>
-                                <img align="center" src={wechatPay} style={{width: '300px', height: '260px'}}></img>
-                            </Col>
-                            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                                <h5 align="center">Buy me a coffee(支付宝)</h5>
-                                <img align="center" src={zhifubaoPay} style={{width: '300px', height: '300px'}}></img>
                             </Col>
                         </Row>
                     </div>
