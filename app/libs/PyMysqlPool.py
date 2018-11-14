@@ -8,7 +8,7 @@ monkey.patch_all()
 import queue
 import threading
 
-from lib.Utility import *
+from .Utility import *
 
 
 class PyMysqlPool(object):

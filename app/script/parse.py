@@ -5,8 +5,8 @@ from gevent import monkey
 monkey.patch_all()
 
 from gevent.pool import Pool
-from lib.PyMysqlPool import PyMysqlPool
-from config import *
+from app.libs.PyMysqlPool import PyMysqlPool
+from app.script.config import *
 import pymysql
 import time
 from bs4 import BeautifulSoup
