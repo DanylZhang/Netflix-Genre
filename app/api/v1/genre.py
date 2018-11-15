@@ -73,7 +73,7 @@ def search_genre():
 @api.route('/wordcount', methods=['GET'])
 def genre_wordcount():
     genre_list = netflix_pool.query_column(
-        "select concat(genre_en,', ',genre_cn) from netflix.genre;")
+        "select concat(genre_en,', ',genre_cn) from netflix.genre limit 5000;")
     genre_list = filter(None, genre_list)
     genre_list_str = ', '.join(genre_list)
     tags = jieba.analyse.extract_tags(genre_list_str, topK=100, withWeight=True)

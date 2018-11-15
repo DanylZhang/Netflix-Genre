@@ -48,7 +48,7 @@ def search_movie():
 @api.route('/wordcount', methods=['GET'])
 def movie_wordcount():
     movie_list = netflix_pool.query_column(
-        "select concat(movie_en,', ',movie_cn) from netflix.movie;")
+        "select concat(movie_en,', ',movie_cn) from netflix.movie limit 5000;")
     movie_list = filter(None, movie_list)
     movie_list_str = ', '.join(movie_list)
     tags = jieba.analyse.extract_tags(movie_list_str, topK=100, withWeight=True)
