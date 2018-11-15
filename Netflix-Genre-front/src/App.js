@@ -10,7 +10,7 @@ import DecadesSelect from "./components/DecadesSelect";
 import GenresTable from "./components/GenresTable";
 import MoviesTable from "./components/MoviesTable";
 import WordCloud from "./components/WordCloud";
-import {genreMask, movieMask, wechatPay, zhifubaoPay} from './const/imageBase64';
+import {genreMask, movieMask} from './const/imageBase64';
 import _ from 'lodash';
 import RelationGraph from "./components/RelationGraph";
 
@@ -97,7 +97,7 @@ class App extends Component {
         Axios.post("/v1/movie/search", searchObj).then((response) => {
             response = response.data
             this.setState({movieReply: response})
-            this.getRelationData(_.take(_.map(response, (item) => item.movie_id), 30));
+            this.getRelationData(_.take(_.map(response, (item) => item.movie_id), 3));
         }).catch((error) => {
             console.log(error);
         })
@@ -207,14 +207,14 @@ class App extends Component {
 
                         {/*vpn*/}
                         <Row gutter={16}>
-                            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                                <h5>Buy me a coffee(微信)</h5>
-                                <img src={wechatPay} style={{width: '300px', height: '260px'}}></img>
-                            </Col>
-                            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                                <h5>Buy me a coffee(支付宝)</h5>
-                                <img src={zhifubaoPay} style={{width: '300px', height: '300px'}}></img>
-                            </Col>
+                            {/*<Col xs={24} sm={24} md={8} lg={8} xl={8}>*/}
+                            {/*<h5>Buy me a coffee(微信)</h5>*/}
+                            {/*<img src={wechatPay} style={{width: '300px', height: '260px'}}></img>*/}
+                            {/*</Col>*/}
+                            {/*<Col xs={24} sm={24} md={8} lg={8} xl={8}>*/}
+                            {/*<h5>Buy me a coffee(支付宝)</h5>*/}
+                            {/*<img src={zhifubaoPay} style={{width: '300px', height: '300px'}}></img>*/}
+                            {/*</Col>*/}
                             <Col xs={24} sm={24} md={8} lg={8} xl={8}>
                                 <br/>
                                 <br/>
@@ -227,7 +227,7 @@ class App extends Component {
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>
-                    Netflix Genre ©2018 Created by Danyl
+                    Netflix Genre ©2018
                 </Footer>
             </Layout>
         );
