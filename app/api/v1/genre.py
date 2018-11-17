@@ -27,7 +27,10 @@ def search_genre():
             decades = request.json['decades']
             search = request.json['search']
         except Exception as e:
-            movie_id = request.json['movie_id']
+            try:
+                movie_id = request.json['movie_id']
+            except Exception as e:
+                pass
 
     if movie_id > 0:
         genre = netflix_pool.query_all_dict(
@@ -73,7 +76,7 @@ def search_genre():
 @api.route('/wordcount', methods=['GET'])
 def genre_wordcount():
     genre_list = netflix_pool.query_column(
-        "select concat(genre_en,', ',genre_cn) from netflix.genre limit 5000;")
+        "select concat(genre_en,', ',genre_cn) from netflix.genre where genre_en is not null limit 5000;")
     genre_list = filter(None, genre_list)
     genre_list_str = ', '.join(genre_list)
     tags = jieba.analyse.extract_tags(genre_list_str, topK=100, withWeight=True)

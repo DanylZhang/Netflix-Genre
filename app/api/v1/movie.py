@@ -18,14 +18,24 @@ netflix_pool = PyMysqlPool(netflix_config, initial_size=1, max_size=3)
 
 @api.route('/search', methods=['POST'])
 def search_movie():
+    genre_id = 0
+    search = ''
+    if request.json:
+        try:
+            movie_id = request.json['movie_id']
+        except Exception as e:
+            try:
+                search = request.json['search']
+            except Exception as e:
+                pass
+
     if request.json is None:
         movie = netflix_pool.query_all_dict("select * from netflix.movie limit 1000;")
-    elif request.json['genre_id'] is not None:
-        genre_id = request.json['genre_id']
+    elif genre_id > 0:
         sql = "select * from netflix.movie m left join netflix.genre_movie gm on m.movie_id=gm.movie_id where genre_id={genre_id}".format(
             genre_id=pymysql.escape_string(str(genre_id)))
         movie = netflix_pool.query_all_dict(sql)
-    elif request.json['search'] is not None:
+    elif len(search) > 0:
         search = request.json['search']
         sql = "select * from netflix.movie where movie_en like '%{movie_en}%' or movie_cn like '%{movie_cn}%'".format(
             movie_en=pymysql.escape_string(search), movie_cn=pymysql.escape_string(search))
