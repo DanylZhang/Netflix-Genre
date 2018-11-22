@@ -22,16 +22,14 @@ def search_movie():
     search = ''
     if request.json:
         try:
-            movie_id = request.json['movie_id']
+            genre_id = request.json['genre_id']
         except Exception as e:
             try:
                 search = request.json['search']
             except Exception as e:
                 pass
 
-    if request.json is None:
-        movie = netflix_pool.query_all_dict("select * from netflix.movie limit 1000;")
-    elif genre_id > 0:
+    if genre_id > 0:
         sql = "select * from netflix.movie m left join netflix.genre_movie gm on m.movie_id=gm.movie_id where genre_id={genre_id}".format(
             genre_id=pymysql.escape_string(str(genre_id)))
         movie = netflix_pool.query_all_dict(sql)
@@ -40,6 +38,8 @@ def search_movie():
         sql = "select * from netflix.movie where movie_en like '%{movie_en}%' or movie_cn like '%{movie_cn}%'".format(
             movie_en=pymysql.escape_string(search), movie_cn=pymysql.escape_string(search))
         movie = netflix_pool.query_all_dict(sql)
+    else:
+        movie = netflix_pool.query_all_dict("select * from netflix.movie limit 1000;")
 
     movie_df = pandas.DataFrame(data=movie)
     movie_ids = movie_df['movie_id'].values.tolist()
