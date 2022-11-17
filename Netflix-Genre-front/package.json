@@ -14,7 +14,7 @@
     "moment": "^2.22.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-scripts": "2.1.1",
+    "react-scripts": "2.1.8",
     "echarts": "^4.2.0-rc.2",
     "echarts-wordcloud": "^1.1.3"
   },
